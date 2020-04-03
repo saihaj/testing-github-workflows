@@ -1,0 +1,30 @@
+# labeler "full" schema
+
+# enable labeler on issues, prs, or both.
+enable:
+  issues: true
+
+# Labels is an object where:
+# - keys are labels
+# - values are objects of { include: [ pattern ], exclude: [ pattern ] }
+#    - pattern must be a valid regex, and is applied globally to
+#      title + description of issues and/or prs (see enabled config above)
+#    - 'include' patterns will associate a label if any of these patterns match
+#    - 'exclude' patterns will ignore this label if any of these patterns match
+labels:
+  'Scope Data':
+    include:
+      -'/(?:Source\:\ Data)/' 
+  'bug':
+    include:
+      - '\bbug[s]?\b'
+    exclude: []
+  'help wanted':
+    include:
+      - '\bhelp( me)?\b'
+    exclude:
+      - '\b\[test(ing)?\]\b'
+  'enhancement':
+    include:
+      - '\bfeat\b'
+    exclude: []
