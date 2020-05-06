@@ -17,23 +17,11 @@ jobs:
     name: Triage to Project Correction
     needs: [label]
     runs-on: ubuntu-latest
-    if: ${{startsWith(github.event.label.name, 'Scope')}}
+    if: startsWith(github.event.label.name, 'Scope')
     steps:
       - uses: alex-page/github-project-automation-plus@v0.1.0
         with:
           project: Correction
           column: Triage
           repo-token: "${{ secrets.GH_PAT }}"
-  triage_management:
-    name: Triage to Project Management
-    needs: [label]
-    runs-on: ubuntu-latest
-    if: ${{!startsWith(github.event.label.name, 'Scope')}}
-    steps:
-      - uses: alex-page/github-project-automation-plus@v0.1.0
-        with:
-          project: Project Management
-          column: Triage
-          repo-token: "${{ secrets.GH_PAT }}"
-
   
