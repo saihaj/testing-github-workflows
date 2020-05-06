@@ -17,6 +17,7 @@ jobs:
   triage_corrections:
     name: Triage to Project Correction
     needs: [label]
+    if: ${{contains(join(github.event.issue.labels.*.name, ', '),'Scope')}}
     runs-on: ubuntu-latest
     steps:
       - uses: alex-page/github-project-automation-plus@v0.1.0
@@ -24,21 +25,3 @@ jobs:
           project: Project Corrections
           column: Triage
           repo-token: "${{ secrets.GH_PAT }}"
-  
-  context_stuff:
-    name: testing
-    runs-on: ubuntu-latest
-    steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Dump label Context
-        env: 
-          labelVal: ${{contains(join(github.event.issue.labels.*.name, ', '),'Scope')}}
-        run: echo "$labelVal"
-      - name: Dump label Context opposite
-        env: 
-          labelVal: ${{!contains(join(github.event.issue.labels.*.name, ', '),'Scope')}}
-        run: echo "$labelVal"
-  
