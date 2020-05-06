@@ -23,7 +23,7 @@ jobs:
         with:
           project: Correction
           column: Triage
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          repo-token: "${{ secrets.GH_PAT }}"
   triage_management:
     name: Triage to Project Management
     needs: [label]
@@ -34,6 +34,6 @@ jobs:
         with:
           project: Project Management
           column: Triage
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          repo-token: "${{ secrets.GH_PAT }}"
 
   
