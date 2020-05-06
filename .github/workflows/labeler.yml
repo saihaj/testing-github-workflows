@@ -28,7 +28,7 @@ jobs:
 
   triage_project:
     name: Triage to Project Management
-    needs: [label,triage_corrections]
+    needs: [label]
     if: ${{!contains(join(github.event.issue.labels.*.name, ', '),'Scope')}}
     runs-on: ubuntu-latest
     steps:
