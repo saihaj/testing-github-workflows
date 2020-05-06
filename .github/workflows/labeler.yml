@@ -17,7 +17,7 @@ jobs:
     name: Triage to Project Correction
     needs: [label]
     runs-on: ubuntu-latest
-    if: "${{contains(github.event.label.name, 'Scope')}}"
+    if: ${{startsWith(github.event.label.name, 'Scope')}}
     steps:
       - uses: alex-page/github-project-automation-plus@v0.1.0
         with:
@@ -28,7 +28,7 @@ jobs:
     name: Triage to Project Management
     needs: [label]
     runs-on: ubuntu-latest
-    if: "${{!contains(github.event.label.name, 'Scope')}}"
+    if: ${{!startsWith(github.event.label.name, 'Scope')}}
     steps:
       - uses: alex-page/github-project-automation-plus@v0.1.0
         with:
