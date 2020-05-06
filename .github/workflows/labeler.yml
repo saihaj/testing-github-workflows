@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: alex-page/github-project-automation-plus@v0.1.0
         with:
-          project: Correction
+          project: Project Corrections
           column: Triage
           repo-token: "${{ secrets.GH_PAT }}"
   
