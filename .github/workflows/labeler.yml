@@ -25,3 +25,15 @@ jobs:
           project: Project Corrections
           column: Triage
           repo-token: "${{ secrets.GH_PAT }}"
+
+  triage_project:
+    name: Triage to Project Management
+    needs: [label]
+    if: ${{!contains(join(github.event.issue.labels.*.name, ', '),'Scope')}}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.1.0
+        with:
+          project: Project Management
+          column: Triage
+          repo-token: "${{ secrets.GH_PAT }}"
