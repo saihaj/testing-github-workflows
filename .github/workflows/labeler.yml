@@ -21,7 +21,7 @@ jobs:
       - env:
           CONTEXT: ${{github.event.label.name}}
           Other_CONT: ${{github.event.label}}
-          run: echo "$CONTEXT \n $Other_CONT"
+        run: echo "$CONTEXT \n $Other_CONT"
       - uses: alex-page/github-project-automation-plus@v0.1.0
         with:
           project: Correction
