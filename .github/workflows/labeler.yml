@@ -35,7 +35,6 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
       - name: Dump Lable Context
         env: 
-          labelName: ${{join(github.event.issue.labels.*.name, ', ')}}
-          labelVal: ${{contains(github.event.issue.labels.*.name,'Scope'}}
-        run: echo "$labelName $labelVal"
+          labelVal: ${{contains(join(github.event.issue.labels.*.name, ', '),'Scope'}}
+        run: echo "$labelVal"
   
