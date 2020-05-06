@@ -1,10 +1,11 @@
-name: "Issue Labeler"
+name: "Issue Labeler and Triage"
 on:
   issues:
     types: [opened, edited]
 
 jobs:
-  triage:
+  label:
+    name: Label Issues
     runs-on: ubuntu-latest
     steps:
     - uses: github/issue-labeler@v2.0
@@ -12,3 +13,27 @@ jobs:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
         configuration-path: .github/labeler.yml
         enable-versioned-regex: 0
+  triage_corrections:
+    name: Triage to Project Correction
+    needs: [label]
+    runs-on: ubuntu-latest
+    if: contains(github.event.label.name, 'Scope')
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.1.0
+        with:
+          project: Correction
+          column: Triage
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+  triage_management:
+    name: Triage to Project Management
+    needs: [label]
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.label.name, 'Scope')"
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.1.0
+        with:
+          project: Project Management
+          column: Triage
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+
+  
