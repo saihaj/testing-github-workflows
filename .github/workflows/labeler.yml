@@ -13,27 +13,27 @@ jobs:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
         configuration-path: .github/labeler.yml
         enable-versioned-regex: 0
+  
   triage_corrections:
     name: Triage to Project Correction
     needs: [label]
+    if: "${{contains(join(github.event.issue.labels.*.name, ', '),'Scope')}}"
     runs-on: ubuntu-latest
-    if: contains(github.event.label.name, 'Scope')
     steps:
       - uses: alex-page/github-project-automation-plus@v0.1.0
         with:
-          project: Correction
+          project: Project Corrections
           column: Triage
           repo-token: "${{ secrets.GH_PAT }}"
-  triage_management:
+
+  triage_project:
     name: Triage to Project Management
     needs: [label]
+    if: "${{!contains(join(github.event.issue.labels.*.name, ', '),'Scope')}}"
     runs-on: ubuntu-latest
-    if: "!contains(github.event.label.name, 'Scope')"
     steps:
       - uses: alex-page/github-project-automation-plus@v0.1.0
         with:
           project: Project Management
           column: Triage
           repo-token: "${{ secrets.GH_PAT }}"
-
-  
