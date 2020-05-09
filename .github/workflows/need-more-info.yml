@@ -2,6 +2,9 @@ name: Needs More Info Closer
 on:
   schedule:
     - cron: '*/5 * * * *'
+  issues:
+    types: [opened, reopened]
+    
 
 jobs:
   main:
