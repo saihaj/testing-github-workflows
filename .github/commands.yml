@@ -1,0 +1,12 @@
+{
+    perform: true,
+    commands: [
+        {
+            type: 'comment',
+            name: 'findDuplicates',
+            allowUsers: ['saihaj'],
+            action: 'comment',
+            comment: "Potential duplicates:\n${potentialDuplicates}"
+        }
+    ]
+}
