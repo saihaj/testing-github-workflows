@@ -1,8 +1,8 @@
 name: Semver
 
 on:
-  push:
-    branches: [ master ]
+  pull_request:
+    types: closed
 
 jobs:
   bump:
