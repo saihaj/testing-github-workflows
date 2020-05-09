@@ -1,7 +1,7 @@
 name: Needs More Info Closer
 on:
   schedule:
-    - cron: '* * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   main:
@@ -21,6 +21,6 @@ jobs:
           label: needs more info
           closeDays: 1
           additionalTeam:	"saihaj"
-          closeComment: "This issue has been closed automatically because it needs more information and has not had recent activity. See also our [issue reporting](https://aka.ms/vscodeissuereporting) guidelines.\n\nHappy Coding!"
+          closeComment: "This issue has been closed automatically because it needs more information and has not had recent activity. \n\nHappy Coding!"
           pingDays: 1
           pingComment: "Hey @${assignee}, this issue might need further attention.\n\n@${author}, you can help us out by closing this issue if the problem no longer exists, or adding more information."
