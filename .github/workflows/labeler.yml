@@ -11,8 +11,8 @@ jobs:
     steps:
       - env:
           labels: ${{ join(github.event.issue.labels.*.name, ', ') }}
-          hold_label: ${{ contains( ${labels}, 'Status: Hold') }}
-          todo_label: ${{ contains( ${labels}, 'Status: To Do') }}
+          hold_label: ${{ contains( ${labels}, "Hold" ) }}
+          todo_label: ${{ contains( ${labels}, "To Do" ) }}
         run: echo "${{ ${hold_label} || ${todo_label} }}"
         if: "${{ ${hold_label} || ${todo_label} }}"
 
