@@ -1,7 +1,7 @@
 name: "Triage on Addition of Labels"
 on:
-  label:
-    types: [created]
+  issue:
+    types: [labeled]
 
 jobs:
 
