@@ -1,33 +1,34 @@
-name: "Triage"
+name: "Triage on Addition of Labels"
 on:
-  issues:
-    types: [opened, closed, assigned, reopened, labeled, unlabeled]
   label:
-    types: [created, edited, deleted]
+    types: [created]
 
 jobs:
 
   triage_backlog:
-    name: Triage to Project Correction
+    name: Triage to Backlog
     runs-on: ubuntu-latest
+    if: "${{contains(join(github.event.issue.labels.*.name, ', '),['Status: Hold', 'Status: To Do'])}}"
     steps:
       - env:
-          CONTEXT: ${{ github.event }}
-
+          CONTEXT: ${{ github.event.labels }}
         run: echo "$CONTEXT"
       - uses: hayuna/github-project-automation-plus@v3.0.9
         with:
-          project: Project Corrections
-          column: Triage
+          project: Project Management
+          column: Backlog
           repo-token: "${{ secrets.GH_PAT }}"
 
-  triage_project:
-    name: Triage to Project Management
-    if: "${{!contains(join(github.event.issue.labels.*.name, ', '),'Scope')}}"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: hayuna/github-project-automation-plus@v3.0.9
-        with:
-          project: Project Management
-          column: Triage
-          repo-token: "${{ secrets.GH_PAT }}"
+    triage_evaluate:
+      name: Triage to Evaluate
+      runs-on: ubuntu-latest
+      if: "${{contains(join(github.event.issue.labels.*.name, ', '),['Status: Score', 'Status: ? ? ?', 'Status: Vague', 'Type: Question'])}}"
+      steps:
+        - env:
+            CONTEXT: ${{ github.event.labels }}
+          run: echo "$CONTEXT"
+        - uses: hayuna/github-project-automation-plus@v3.0.9
+          with:
+            project: Project Management
+            column: Evaluate
+            repo-token: "${{ secrets.GH_PAT }}"
