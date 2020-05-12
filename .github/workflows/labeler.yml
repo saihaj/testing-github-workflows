@@ -1,25 +1,18 @@
-name: "Issue Labeler and Triage"
+name: "Triage"
 on:
   issues:
-    types: [opened, edited]
+    types: [opened, closed, assigned, reopened, labeled, unlabeled]
+  label:
+    types: [created, edited, deleted]
 
 jobs:
-  label:
-    name: Label Issues
-    runs-on: ubuntu-latest
-    steps:
-    - uses: github/issue-labeler@v2.0
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
-        configuration-path: .github/labeler.yml
-        enable-versioned-regex: 0
-  
-  triage_corrections:
+
+  triage_backlog:
     name: Triage to Project Correction
     needs: [label]
-    if: "${{contains(join(github.event.issue.labels.*.name, ', '),'Scope')}}"
     runs-on: ubuntu-latest
     steps:
+        echo: "${{ github.event }}"
       - uses: hayuna/github-project-automation-plus@v3.0.9
         with:
           project: Project Corrections
