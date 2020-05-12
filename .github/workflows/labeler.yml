@@ -9,12 +9,11 @@ jobs:
 
   triage_backlog:
     name: Triage to Project Correction
-    needs: [label]
     runs-on: ubuntu-latest
     steps:
       - env:
           CONTEXT: ${{ github.event }}
-          
+
         run: echo "$CONTEXT"
       - uses: hayuna/github-project-automation-plus@v3.0.9
         with:
@@ -24,7 +23,6 @@ jobs:
 
   triage_project:
     name: Triage to Project Management
-    needs: [label]
     if: "${{!contains(join(github.event.issue.labels.*.name, ', '),'Scope')}}"
     runs-on: ubuntu-latest
     steps:
