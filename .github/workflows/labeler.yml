@@ -12,7 +12,10 @@ jobs:
     needs: [label]
     runs-on: ubuntu-latest
     steps:
-        echo: "${{ github.event }}"
+      - env:
+          CONTEXT: ${{ github.event }}
+          
+        run: echo "$CONTEXT"
       - uses: hayuna/github-project-automation-plus@v3.0.9
         with:
           project: Project Corrections
