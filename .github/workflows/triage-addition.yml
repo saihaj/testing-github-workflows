@@ -17,7 +17,6 @@ jobs:
           repo-token: "${{ secrets.GH_PAT }}"
 
   triage_evaluate:
-    needs: [triage_backlog]
     name: Triage to Evaluate
     runs-on: ubuntu-latest
     if: "${{ contains( join(github.event.issue.labels.*.name, ', '), 'Score' )  || contains( join(github.event.issue.labels.*.name, ', '), '? ? ?') || contains( join(github.event.issue.labels.*.name, ', '), 'Vague') || contains( join(github.event.issue.labels.*.name, ', '), 'Question') }}"
