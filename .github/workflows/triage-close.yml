@@ -1,0 +1,16 @@
+name: "Triage on Closing"
+on:
+  issues:
+    types: [closed]
+
+jobs:
+
+  triage:
+    name: Triage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: hayuna/github-project-automation-plus@v3.0.9
+        with:
+          project: Project Management
+          column: Done
+          repo-token: "${{ secrets.GH_PAT }}"
