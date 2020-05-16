@@ -12,7 +12,7 @@ jobs:
       - env:
           hold_label: ${{ contains( github.event.issue.labels.*.name, 'Hold' ) }}
           todo_label: ${{ contains( github.event.issue.labels.*.name, 'To Do' ) }}
-        run: echo "${{ $hold_label || $todo_label }}"
+        run: echo "$hold_label || $todo_label"
         if: "${{ $hold_label || $todo_label }}"
 
       - uses: hayuna/github-project-automation-plus@v3.0.9
