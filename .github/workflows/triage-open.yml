@@ -1,0 +1,16 @@
+name: "Triage on Opening"
+on:
+  issues:
+    types: [opened]
+
+jobs:
+
+  triage:
+    name: Triage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: hayuna/github-project-automation-plus@v3.0.9
+        with:
+          project: Project Management
+          column: Triage
+          repo-token: "${{ secrets.GH_PAT }}"
