@@ -8,10 +8,22 @@ jobs:
   triage_backlog:
     name: Triage to Backlog
     runs-on: ubuntu-latest
-    if: "${{ contains( github.event.issue.labels.*.name[-1], 'Hold' )  || contains( github.event.issue.labels.*.name[-1], 'To Do') }}"
+    if: "${{ contains( join(github.event.issue.labels.*.name, ', '), 'Hold' )  || contains( join(github.event.issue.labels.*.name, ', '), 'To Do') }}"
     steps:
       - uses: hayuna/github-project-automation-plus@v3.0.9
         with:
           project: Project Management
           column: Backlog
+          repo-token: "${{ secrets.GH_PAT }}"
+
+  triage_evaluate:
+    needs: [triage_backlog]
+    name: Triage to Evaluate
+    runs-on: ubuntu-latest
+    if: "${{ contains( join(github.event.issue.labels.*.name, ', '), 'Score' )  || contains( join(github.event.issue.labels.*.name, ', '), '? ? ?') || contains( join(github.event.issue.labels.*.name, ', '), 'Vague') || contains( join(github.event.issue.labels.*.name, ', '), 'Question') }}"
+    steps:
+      - uses: hayuna/github-project-automation-plus@v3.0.9
+        with:
+          project: Project Management
+          column: Evaluate
           repo-token: "${{ secrets.GH_PAT }}"
