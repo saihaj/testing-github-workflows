@@ -8,7 +8,7 @@ jobs:
   triage_backlog:
     name: Triage to Backlog
     runs-on: ubuntu-latest
-    if: "${{ contains( join(github.event.issue.labels.*.name, ', '), 'Hold' )  || contains( join(github.event.issue.labels.*.name, ', '), 'To Do' }}"
+    if: "${{ contains( join(github.event.issue.labels.*.name, ', '), 'Hold' )  || contains( join(github.event.issue.labels.*.name, ', '), 'To Do') }}"
     steps:
       - uses: hayuna/github-project-automation-plus@v3.0.9
         with:
