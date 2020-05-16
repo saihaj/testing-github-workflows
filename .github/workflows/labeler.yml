@@ -10,9 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - env:
-          labels: ${{ join(github.event.issue.labels.*.name, ', ') }}
-          hold_label: ${{ contains( labels, "Hold" ) }}
-          todo_label: ${{ contains( labels, "To Do" ) }}
+          hold_label: ${{ contains( github.event.issue.labels.*.name, "Hold" ) }}
+          todo_label: ${{ contains( github.event.issue.labels.*.name, "To Do" ) }}
         run: echo "${{ $hold_label || $todo_label }}"
         if: "${{ $hold_label || $todo_label }}"
 
