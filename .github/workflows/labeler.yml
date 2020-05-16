@@ -27,3 +27,15 @@ jobs:
           project: Project Management
           column: Evaluate
           repo-token: "${{ secrets.GH_PAT }}"
+
+  triage_progress:
+    needs: [triage_backlog, triage_evaluate]
+    name: Triage to Progress
+    runs-on: ubuntu-latest
+    if: "${{ contains( join(github.event.issue.labels.*.name, ', '), 'WIP' ) }}"
+    steps:
+      - uses: hayuna/github-project-automation-plus@v3.0.9
+        with:
+          project: Project Management
+          column: Progress
+          repo-token: "${{ secrets.GH_PAT }}"
