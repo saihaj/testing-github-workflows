@@ -15,3 +15,14 @@ jobs:
           project: Project Management
           column: Backlog
           repo-token: "${{ secrets.GH_PAT }}"
+
+  triage_evaluate:
+    name: Triage to Evaluate
+    runs-on: ubuntu-latest
+    if: "${{ contains( join(github.event.issue.labels.*.name, ', '), 'Score' )  || contains( join(github.event.issue.labels.*.name, ', '), '? ? ?') || contains( join(github.event.issue.labels.*.name, ', '), 'Vague') || contains( join(github.event.issue.labels.*.name, ', '), 'Question') }}"
+    steps:
+      - uses: hayuna/github-project-automation-plus@v3.0.9
+        with:
+          project: Project Management
+          column: Evaluate
+          repo-token: "${{ secrets.GH_PAT }}"
